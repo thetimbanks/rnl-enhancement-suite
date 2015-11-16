@@ -6,6 +6,7 @@ var App = {
         this.toggle_images();
         this.link_out();
         this.init_huboard();
+        this.init_jira();
     },
     set_body_class: function() {
         $("body").addClass(this.host.substring(0, this.host.indexOf(".com")));
@@ -43,6 +44,16 @@ var App = {
                     }).closest(".card").css({ borderWidth: "2px", borderColor: "red" });
             }
         });
+    },
+    init_jira: function() {
+        // open ticket in new window when clicking on board instead of opening tab
+        $('.ghx-key a').on('click', function(event) { 
+            window.location = $(this).prop('href');
+            event.preventDefault();
+        });
+
+        // hide the detail tab on the right
+        $(".ghx-detail-close span").click();
     }
 };
 
