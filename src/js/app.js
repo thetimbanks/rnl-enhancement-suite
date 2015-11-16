@@ -47,7 +47,7 @@ var App = {
     },
     init_jira: function() {
         // open ticket in new window when clicking on board instead of opening tab
-        $('.ghx-key a').on('click', function(event) { 
+        $(document).on('click', '.ghx-key a', function(event) { 
             window.location = $(this).prop('href');
             event.preventDefault();
         });
