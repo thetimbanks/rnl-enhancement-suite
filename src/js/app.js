@@ -7,6 +7,7 @@ var App = {
         this.link_out();
         this.init_huboard();
         this.init_jira();
+        this.init_slack();
     },
     set_body_class: function() {
         $("body").addClass(this.host.substring(0, this.host.indexOf(".com")));
@@ -54,6 +55,38 @@ var App = {
 
         // hide the detail tab on the right
         $(".ghx-detail-close span").click();
+    },
+    init_slack: function() {
+        function add_apollo_links() {
+            if (!$("body").hasClass("loading")) {
+                 var channelName = $(".name").text();
+                 if (channelName == "apollo" && !$('.custom-links').length) {
+                    var links = '<span class="custom-links">' +
+                                '<a target="_blank" href="https://jira.rnl.io/secure/RapidBoard.jspa?rapidView=10&useStoredSettings=true">Jira</a> ' +
+                                '<a target="_blank" href="https://app.honeybadger.io/projects/45429/faults?q=-is%3Aresolved+-is%3Aignored+environment%3Acubesmart&sort=last_seen_desc">HB-FMS</a> ' +
+                                '<a target="_blank" href="https://app.honeybadger.io/projects/45399/faults?q=-is%3Aresolved+-is%3Aignored+environment%3Acubesmart&sort=last_seen_desc">HB-SESC</a> ' +
+                                '<a target="_blank" href="https://github.com/rednovalabs/fms">GH-FMS</a> ' +
+                                '<a target="_blank" href="https://github.com/rednovalabs/fms">GH-SESC</a> ' +
+                                '<a target="_blank" href="https://store.cms.cubesmart.com/sidekiq/">Sidekiq</a> ' +
+                                '<a target="_blank" href="https://store.cms.cubesmart.com/lazarus/carves">Carve</a> ' +
+                                '<a target="_blank" href="http://goo.gl/XYB6fc">Hangout</a>' +
+                                '</span>';
+                     $("#channel_actions").after(links);
+                 }
+
+                 if (channelName) {
+                     clearInterval(loadingInterval);
+                 }
+            }
+        }
+
+        var loadingInterval = setInterval(function() {
+            add_apollo_links();
+        }, 250); 
+
+        $('body').on('DOMSubtreeModified', '#active_channel_name', function() {
+            add_apollo_links();
+        });
     }
 };
 
