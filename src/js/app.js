@@ -3,14 +3,18 @@ var App = {
         this.host = window.location.host;
 
         this.set_body_class();
-        this.toggle_images();
-        this.link_out();
+        this.init_github();
         this.init_huboard();
         this.init_jira();
         this.init_slack();
     },
     set_body_class: function() {
         $("body").addClass(this.host.substring(0, this.host.indexOf(".com")));
+    },
+    init_github: function() {
+        this.toggle_images();
+        this.link_out();
+        this.test_this_please();
     },
     toggle_images: function() {
         $(".comment-body img:not('.toggled'):not('.emoji')").hide().addClass("toggled")
@@ -30,6 +34,15 @@ var App = {
                 return $(this).not('.issue-link');
             }).attr("target", "_blank");
     },
+    test_this_please: function() {
+        var new_comment_form_actions = $("#partial-new-comment-form-actions");
+        var button = $("<button>").addClass("btn").text("Test Again");
+        button.click(function() {
+            $("#new_comment_field").val("test this please");
+            new_comment_form_actions.find("btn-primary").click();
+        });
+        new_comment_form_actions.append(button);
+    },
     init_huboard: function() {
         $(document).on('DOMNodeInserted', function(e) {
             if ($(e.target).find(".comment-body").length > 0) {
@@ -48,7 +61,7 @@ var App = {
     },
     init_jira: function() {
         // open ticket in new window when clicking on board instead of opening tab
-        $(document).on('click', '.ghx-key a', function(event) { 
+        $(document).on('click', '.ghx-key a', function(event) {
             window.location = $(this).prop('href');
             event.preventDefault();
         });
@@ -82,7 +95,7 @@ var App = {
 
         var loadingInterval = setInterval(function() {
             add_apollo_links();
-        }, 250); 
+        }, 250);
 
         $('body').on('DOMSubtreeModified', '#active_channel_name', function() {
             add_apollo_links();
