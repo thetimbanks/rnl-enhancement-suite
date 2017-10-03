@@ -14,7 +14,6 @@ var App = {
     init_github: function() {
         this.toggle_images();
         this.link_out();
-        this.test_this_please();
     },
     toggle_images: function() {
         $(".comment-body img:not('.toggled'):not('.emoji')").hide().addClass("toggled")
@@ -33,6 +32,7 @@ var App = {
 
                 return $(this).not('.issue-link');
             }).attr("target", "_blank");
+        this.test_this_please();
     },
     test_this_please: function() {
         var new_comment_form_actions = $("#partial-new-comment-form-actions");
