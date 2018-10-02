@@ -8,7 +8,7 @@ var App = {
         this.init_slack();
     },
     set_body_class: function() {
-        $("body").addClass(this.host.substring(0, this.host.indexOf(".com")));
+        $("body").addClass(this.host.substring(0, this.host.indexOf(".")));
     },
     init_github: function() {
         this.toggle_images();
