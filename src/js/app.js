@@ -36,12 +36,14 @@ var App = {
     },
     test_this_please: function() {
         var new_comment_form_actions = $("#partial-new-comment-form-actions");
-        var button = $("<button>").addClass("btn").text("Test Again");
+        var button = $("<button>").addClass("btn test-again-button").text("Test Again");
         button.click(function() {
             $("#new_comment_field").val("test this please");
             new_comment_form_actions.find("btn-primary").click();
         });
-        new_comment_form_actions.append(button);
+        if (!$('.test-again-button').length) {
+            new_comment_form_actions.append(button);
+        }
     },
     init_huboard: function() {
         $(document).on('DOMNodeInserted', function(e) {
