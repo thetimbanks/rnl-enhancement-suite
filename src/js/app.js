@@ -4,7 +4,6 @@ var App = {
 
         this.set_body_class();
         this.init_github();
-        this.init_huboard();
         this.init_jira();
         this.init_slack();
     },
@@ -44,22 +43,6 @@ var App = {
         if (!$('.test-again-button').length) {
             new_comment_form_actions.append(button);
         }
-    },
-    init_huboard: function() {
-        $(document).on('DOMNodeInserted', function(e) {
-            if ($(e.target).find(".comment-body").length > 0) {
-                App.toggle_images();
-                App.link_out(true);
-            }
-
-            // Highlight tickets with [?] in the title
-            if ($(e.target).find(".card").length) {
-                $(".column:not(:first) .title:contains('[?]')").closest(".card").css({ borderWidth: "2px", borderColor: "red" });
-                $(".column:not(:first) .title").filter(function() {
-                        return !$(this).text().match(/\[.*\]/);
-                    }).closest(".card").css({ borderWidth: "2px", borderColor: "red" });
-            }
-        });
     },
     init_jira: function() {
         // open ticket in new window when clicking on board instead of opening tab
