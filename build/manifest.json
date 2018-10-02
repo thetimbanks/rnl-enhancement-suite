@@ -13,7 +13,7 @@
     },
     "content_scripts": [
         {
-          "matches": ["https://github.com/*", "https://www,github.com/*", "https://huboard.com/*", "https://www.huboard.com/*","https://jira2.rnl.io/*","https://rednovalabs.slack.com/*"],
+          "matches": ["https://github.com/*", "https://www,github.com/*", "https://huboard.com/*", "https://www.huboard.com/*","https://jira.rnl.io/*","https://rednovalabs.slack.com/*"],
           "css": ["css/github.css", "css/huboard.css", "css/slack.css"],
           "js": ["js/vendors/jquery.js", "js/app.js"]
         }
